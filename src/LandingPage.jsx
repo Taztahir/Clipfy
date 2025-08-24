@@ -125,7 +125,7 @@ function LandingPage() {
                     <img src={ClipfyMockup} alt="" />
                 </div>
             </header>
-            <div className="grid max-lg:gap-10 gap-5 md:grid-cols-3 lg:max-w-6xl mx-auto"> 
+            <div className="grid max-lg:gap-10 gap-5 lg:grid-cols-3 lg:max-w-6xl mx-auto"> 
                 <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}   
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
@@ -151,13 +151,27 @@ function LandingPage() {
                 <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
-                        <LineChart className="size-10 text-blue-60 dark:text-white0"/>
+                        <LineChart className="size-10 text-blue-600 dark:text-white0"/>
                     </div>
                     {/* text  */}
                     <div>
                         <h1 className="text-xl font-bold">Trend Insight</h1>
                         <p className="text-xs">Stay ahead with AI-driven insights that show what’s trending and help your content go viral.</p>
                     </div>
+                </div>
+            </div>
+            {/* content -creator  */}
+            <div className="md:flex max-md:space-y-5 items-center justify-between bg-blue-100 dark:bg-blue-950 p-5 my-15 rounded-2xl macondo-regular">
+                <div>
+                    <h1 className="font-semibold lg:text-xl text-lg">Join thousands of creators transforming their content with Clipfy</h1>
+                    <h1 className=" text-gray-400 text-lg">Learn more</h1>
+                </div>
+                <div>
+                    <Link to="/signup">
+                        <button className="px-10 py-3 max-lg:w-full rounded-xl font-semibold text-white hover:-translate-y-1
+                                    bg-blue-600 
+                                    hover:opacity-90 transition-all duration-300 shadow-lg lg:text-2xl text-lg hover:shadow-lg hover:shadow-white">Get Started</button>
+                    </Link>
                 </div>
             </div>
         </div>
