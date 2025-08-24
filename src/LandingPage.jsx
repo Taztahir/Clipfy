@@ -126,7 +126,7 @@ function LandingPage() {
                 </div>
             </header>
             <div className="grid max-lg:gap-10 gap-5 md:grid-cols-3 lg:max-w-6xl mx-auto"> 
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}   
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
                         <Sparkles className="size-10 text-blue-600 dark:text-white"/>
@@ -137,7 +137,7 @@ function LandingPage() {
                         <p className="text-xs">Transform your raw clips into professional videos in seconds with AI-powered smart editing.</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
                         <Captions className="size-10 text-blue-600 dark:text-white"/>
@@ -148,7 +148,7 @@ function LandingPage() {
                         <p className="text-xs">Automatically generate accurate captions for your videos — boost accessibility and engagement instantly.</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
                         <LineChart className="size-10 text-blue-60 dark:text-white0"/>
