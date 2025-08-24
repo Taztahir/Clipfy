@@ -50,7 +50,7 @@ function LandingPage() {
                                     </Link>
                     </div>
                     {/* Mobile menu icon */}
-                    <button onClick={openMenu} className="lg:hidden text-white text-3xl ">
+                    <button onClick={openMenu} className="lg:hidden text-[#0F172A] dark:text-white text-3xl ">
                         &#9776;
                     </button>
                 </div>
@@ -76,13 +76,11 @@ function LandingPage() {
             &times;
           </button>
         </div>
-        <ul className="flex flex-col space-y-4 text-center py-10 px-6 text-lg">
-          <li className="border-b pb-2">Home</li>
-          <li className="border-b pb-2" ></li>
-          <li className="border-b pb-2">Resume</li>
-          <li className="border-b pb-2">Services</li>
-          <li className="border-b pb-2">Projects</li>
-          <li className="pb-2">Contact</li>
+        <ul className="flex flex-col space-y-4 text-center py-10 px-20 text-lg">
+          <Link className="border-b-1 pb-5" to="/">Home</Link>
+          <Link className="border-b-1 pb-5" to="">Features</Link>
+          <Link className="border-b-1 pb-5" to="">Pricing</Link>
+          <Link className="border-b-1 pb-5" to="/">Blog</Link>
         </ul>
       </div>
                 
