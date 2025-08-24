@@ -151,7 +151,7 @@ function LandingPage() {
                 <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
-                        <LineChart className="size-10 text-blue-600 dark:text-white0"/>
+                        <LineChart className="size-10 text-blue-600 dark:text-white"/>
                     </div>
                     {/* text  */}
                     <div>
