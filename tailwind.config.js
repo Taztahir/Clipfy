@@ -1,0 +1,6 @@
+module.exports = {
+  darkMode: "class", // or "media"
+  // other configs...
+  lightMode: "class", // or "media"
+  // other configs...
+};
