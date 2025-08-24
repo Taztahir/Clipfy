@@ -1,18 +1,23 @@
 import Logo from "./Logo";
 import App from "./App";
+import { useState } from "react";
 // import { BrowserRouter as Link } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 // import LandingPage from "./LandingPage";
 import ClipfyMockup from './assets/image/Clipfy-Adevertisement.png'
 
 function LandingPage() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+  const openMenu = () => setMenuOpen(true);
+  const closeMenu = () => setMenuOpen(false);
     return(
         <div className="dark:text-white md:px-20 px-5 py-7 ">
             {/* Landing page  */}
             {/* colour  */}
             {/* bg-gradient-to-r from-[#8C52FF] to-[#FF4B8C]  */}
             {/* Navbar  */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between ">
                 {/* logo */}
                 <div>
                     <Link to="/">
@@ -30,7 +35,7 @@ function LandingPage() {
                     </div>
                     {/* Log in buttons  */}
                     <div className="max-sm:hidden ">
-                        <Link to="/SignUp">
+                        <Link to="/login">
                         <button class="px-6 py-3 rounded-lg font-semibold text-black 
                                     dark:text-white hover:bg-white hover:text-black
                                     hover:opacity-90 transition-all duration-300 font-sans macondo-regular dark:border-white border-2">Log In</button>
@@ -38,13 +43,48 @@ function LandingPage() {
                     </div>
                     {/* Sign up buttons  */}
                     <div>
-                        <Link to="/SignUp">
+                        <Link to="/signup">
                         <button class="px-6 py-3 rounded-lg font-semibold text-white 
                                     bg-blue-600
-                                    hover:opacity-90 transition-all duration-300 font-sans macondo-regular shadow-lg">Sign Up</button>
+                                    hover:opacity-90 transition-all duration-300 font-sans macondo-regular   shadow-lg">Sign Up</button>
                                     </Link>
                     </div>
+                    {/* Mobile menu icon */}
+                    <button onClick={openMenu} className="lg:hidden text-[#77777D] text-3xl">
+                        &#9776;
+                    </button>
                 </div>
+
+                {/* Overlay */}
+      {menuOpen && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 transition-opacity duration-300 z-40"
+          onClick={closeMenu}
+        ></div>
+      )}
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 left-0 w-full h-full bg-white z-50 transition-all duration-500 ease-in-out transform lg:hidden ${
+          menuOpen
+            ? 'translate-y-0 opacity-100 scale-100 pointer-events-auto'
+            : '-translate-y-full opacity-0 scale-95 pointer-events-none'
+        }`}
+      >
+        <div className="flex justify-end p-4">
+          <button onClick={closeMenu} className="text-[#77777D] text-3xl border-2 px-3 py-1 flex items-center justify-center rounded-full">
+            &times;
+          </button>
+        </div>
+        <ul className="flex flex-col space-y-4 text-center py-10 px-6 text-[#77777D] text-lg">
+          <li className="border-b pb-2">Home</li>
+          <li className="border-b pb-2">About</li>
+          <li className="border-b pb-2">Resume</li>
+          <li className="border-b pb-2">Services</li>
+          <li className="border-b pb-2">Projects</li>
+          <li className="pb-2">Contact</li>
+        </ul>
+      </div>
                 
             </div>
             {/* header  */}
