@@ -12,7 +12,7 @@ function LandingPage() {
   const openMenu = () => setMenuOpen(true);
   const closeMenu = () => setMenuOpen(false);
     return(
-        <div className="dark:text-white md:px-20 px-5 py-7 ">
+        <div className="dark:text-white dark:bg-[#0F172A] md:px-20 px-5 py-7 ">
             {/* Landing page  */}
             {/* colour  */}
             {/* bg-gradient-to-r from-[#8C52FF] to-[#FF4B8C]  */}
@@ -24,7 +24,7 @@ function LandingPage() {
                         <Logo/>
                     </Link>
                 </div>
-                <div className="flex items-center space-x-10 ">
+                <div className="flex items-center md:space-x-10 space-x-5 ">
                     {/* links  */}
                     <div className="space-x-10 max-lg:hidden font-sans font-semibold macondo-regular">
                         <Link to="/">Home</Link>
@@ -36,8 +36,8 @@ function LandingPage() {
                     {/* Log in buttons  */}
                     <div className="max-sm:hidden ">
                         <Link to="/login">
-                        <button class="px-6 py-3 rounded-lg font-semibold text-black 
-                                    dark:text-white hover:bg-white hover:text-black
+                        <button class="px-6 py-3 rounded-lg font-semibold text-[#0F172A] 
+                                    dark:text-white hover:bg-white hover:text-[#0F172A]
                                     hover:opacity-90 transition-all duration-300 font-sans macondo-regular dark:border-white border-2">Log In</button>
                                     </Link>
                     </div>
@@ -50,7 +50,7 @@ function LandingPage() {
                                     </Link>
                     </div>
                     {/* Mobile menu icon */}
-                    <button onClick={openMenu} className="lg:hidden text-[#77777D] text-3xl">
+                    <button onClick={openMenu} className="lg:hidden text-white text-3xl ">
                         &#9776;
                     </button>
                 </div>
@@ -58,27 +58,27 @@ function LandingPage() {
                 {/* Overlay */}
       {menuOpen && (
         <div
-          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 transition-opacity duration-300 z-40"
+          className="fixed top-0 left-0 w-full h-full bg-[#0F172A] bg-opacity-50 transition-opacity duration-300 z-40"
           onClick={closeMenu}
         ></div>
       )}
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-white z-50 transition-all duration-500 ease-in-out transform lg:hidden ${
+        className={`fixed top-0 left-0 w-full h-full  dark:bg-[#0F172A] dark:text-white text-[#0F172A] bg-white z-50 transition-all duration-500 ease-in-out transform lg:hidden ${
           menuOpen
             ? 'translate-y-0 opacity-100 scale-100 pointer-events-auto'
             : '-translate-y-full opacity-0 scale-95 pointer-events-none'
         }`}
       >
         <div className="flex justify-end p-4">
-          <button onClick={closeMenu} className="text-[#77777D] text-3xl border-2 px-3 py-1 flex items-center justify-center rounded-full">
+          <button onClick={closeMenu} className=" text-3xl ">
             &times;
           </button>
         </div>
-        <ul className="flex flex-col space-y-4 text-center py-10 px-6 text-[#77777D] text-lg">
+        <ul className="flex flex-col space-y-4 text-center py-10 px-6 text-lg">
           <li className="border-b pb-2">Home</li>
-          <li className="border-b pb-2">About</li>
+          <li className="border-b pb-2" ></li>
           <li className="border-b pb-2">Resume</li>
           <li className="border-b pb-2">Services</li>
           <li className="border-b pb-2">Projects</li>
