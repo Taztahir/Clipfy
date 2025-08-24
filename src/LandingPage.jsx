@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import { Sparkles, Captions, LineChart } from "lucide-react";
 import App from "./App";
 import { useState } from "react";
 // import { BrowserRouter as Link } from "react-router-dom";
@@ -113,9 +114,10 @@ function LandingPage() {
                         The <b>all-in-one</b> platform that streamlines <br className="max-md:hidden"/>content creation, editing, and growth:
                     </p>
                     <div className="lg:space-x-5 space-y-5 max-lg:flex max-lg:flex-col macondo-regular">
-                        <button className="px-10 py-3 rounded-xl font-semibold text-white hover:-translate-y-1
+                        <Link to="/signup">
+                        <button className="px-10 py-3 max-lg:w-full rounded-xl font-semibold text-white hover:-translate-y-1
                                     bg-blue-600 
-                                    hover:opacity-90 transition-all duration-300 shadow-lg text-2xl hover:shadow-lg hover:shadow-white">Start Free</button>
+                                    hover:opacity-90 transition-all duration-300 shadow-lg text-2xl hover:shadow-lg hover:shadow-white">Start Free</button></Link>
                         <button className="bg-white px-10 py-3 text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-white text-2xl dark:border-0 border-2 hover:-translate-y-1 transition-all duration-300 ">Watch Demo</button>
                     </div>
                 </div>
@@ -123,6 +125,41 @@ function LandingPage() {
                     <img src={ClipfyMockup} alt="" />
                 </div>
             </header>
+            <div className="grid max-lg:gap-10 gap-5 md:grid-cols-3 lg:max-w-6xl mx-auto"> 
+                <div className="flex items-center gap-5">
+                    {/* icon  */}   
+                    <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
+                        <Sparkles className="size-10 text-blue-600 dark:text-white"/>
+                    </div>
+                    {/* text  */}
+                    <div>
+                        <h1 className="text-xl font-bold">AI Smart Editing</h1>
+                        <p className="text-xs">Transform your raw clips into professional videos in seconds with AI-powered smart editing.</p>
+                    </div>
+                </div>
+                <div className="flex items-center gap-5">
+                    {/* icon  */}
+                    <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
+                        <Captions className="size-10 text-blue-600 dark:text-white"/>
+                    </div>
+                    {/* text  */}
+                    <div>
+                        <h1 className="text-xl font-bold">Auto Captions</h1>
+                        <p className="text-xs">Automatically generate accurate captions for your videos — boost accessibility and engagement instantly.</p>
+                    </div>
+                </div>
+                <div className="flex items-center gap-5">
+                    {/* icon  */}
+                    <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
+                        <LineChart className="size-10 text-blue-60 dark:text-white0"/>
+                    </div>
+                    {/* text  */}
+                    <div>
+                        <h1 className="text-xl font-bold">Trend Insight</h1>
+                        <p className="text-xs">Stay ahead with AI-driven insights that show what’s trending and help your content go viral.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
