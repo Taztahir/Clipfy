@@ -72,15 +72,31 @@ function LandingPage() {
         }`}
       >
         <div className="flex justify-end p-4">
-          <button onClick={closeMenu} className=" text-3xl ">
+          <button onClick={closeMenu} className=" text-3xl border-dotted border-2 px-3 py-1 hover:bg-[#0F172A] hover:text-white transition-all duration-300">
             &times;
           </button>
         </div>
-        <ul className="flex flex-col space-y-4 text-center py-10 px-20 text-lg">
+        <ul className="flex flex-col space-y-5 text-center py-10 px-20 text-lg">
           <Link className="border-b-1 pb-5" to="/">Home</Link>
           <Link className="border-b-1 pb-5" to="">Features</Link>
           <Link className="border-b-1 pb-5" to="">Pricing</Link>
           <Link className="border-b-1 pb-5" to="/">Blog</Link>
+          {/* Log in buttons  */}
+                    <div className="">
+                        <Link to="/login">
+                        <button class="w-full py-3 rounded-lg font-semibold text-[#0F172A] 
+                                    dark:text-white hover:bg-white hover:text-[#0F172A]
+                                    hover:opacity-90 transition-all duration-300 font-sans macondo-regular dark:border-white border-2">Log In</button>
+                                    </Link>
+                    </div>
+                    {/* Sign up buttons  */}
+                    <div>
+                        <Link to="/signup">
+                        <button class="w-full py-3 rounded-lg font-semibold text-white 
+                                    bg-blue-600
+                                    hover:opacity-90 transition-all duration-300 font-sans macondo-regular   shadow-lg">Sign Up</button>
+                                    </Link>
+                    </div>
         </ul>
       </div>
                 
