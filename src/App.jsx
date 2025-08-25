@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "./Dashboard";
 import LandingPage from "./LandingPage";
-import Signup from "./Signup";
 import Login from "./Login";
+import Signup from "./Signup";
 import './App.css'
 import Footer from "./Footer";
 
