@@ -38,7 +38,7 @@ function LandingPage() {
                     {/* Log in buttons  */}
                     <div className="max-sm:hidden ">
                         <Link to="/login">
-                        <button class="px-6 py-3 rounded-lg font-semibold text-[#0F172A] 
+                        <button className="px-6 py-3 rounded-lg font-semibold text-[#0F172A] 
                                     dark:text-white hover:bg-white hover:text-[#0F172A]
                                     hover:opacity-90 transition-all duration-300 font-sans macondo-regular dark:border-white border-2">Log In</button>
                                     </Link>
@@ -46,7 +46,7 @@ function LandingPage() {
                     {/* Sign up buttons  */}
                     <div>
                         <Link to="/signup">
-                        <button class="px-6 py-3 rounded-lg font-semibold text-white 
+                        <button className="px-6 py-3 rounded-lg font-semibold text-white 
                                     bg-blue-600
                                     hover:opacity-90 transition-all duration-300 font-sans macondo-regular   shadow-lg">Sign Up</button>
                                     </Link>
