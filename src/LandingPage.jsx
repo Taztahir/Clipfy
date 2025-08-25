@@ -5,6 +5,7 @@ import { useState } from "react";
 // import { BrowserRouter as Link } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 // import LandingPage from "./LandingPage";
+import Footer from "./Footer";
 import ClipfyMockup from './assets/image/Clipfy-Adevertisement.png'
 
 function LandingPage() {
@@ -13,12 +14,12 @@ function LandingPage() {
   const openMenu = () => setMenuOpen(true);
   const closeMenu = () => setMenuOpen(false);
     return(
-        <div className="dark:text-white dark:bg-[#0F172A] md:px-20 px-5 py-7 ">
+        <div className="dark:text-white dark:bg-[#0F172A] md:px-20 px-5">
             {/* Landing page  */}
             {/* colour  */}
             {/* bg-gradient-to-r from-[#8C52FF] to-[#FF4B8C]  */}
             {/* Navbar  */}
-            <div className="flex items-center justify-between ">
+            <div className="flex items-center justify-between py-7">
                 {/* logo */}
                 <div>
                     <Link to="/">
@@ -125,7 +126,7 @@ function LandingPage() {
                     <img src={ClipfyMockup} alt="" />
                 </div>
             </header>
-            <div className="grid max-lg:gap-10 gap-5 lg:grid-cols-3 lg:max-w-6xl mx-auto"> 
+            <div className="grid max-lg:gap-10 gap-5 lg:grid-cols-3"> 
                 <div className="flex items-center gap-5 macondo-regular">
                     {/* icon  */}   
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
@@ -137,7 +138,7 @@ function LandingPage() {
                         <p className="text-xs">Transform your raw clips into professional videos in seconds with AI-powered smart editing.</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-5 macondo-regular">
+                <div className="flex items-center gap-5 macondo-regular ">
                     {/* icon  */}
                     <div className="dark:bg-blue-950 bg-blue-100 rounded-lg p-3">
                         <Captions className="size-10 text-blue-600 dark:text-white"/>
@@ -161,9 +162,9 @@ function LandingPage() {
                 </div>
             </div>
             {/* content -creator  */}
-            <div className="md:flex max-md:space-y-5 items-center justify-between bg-blue-100 dark:bg-blue-950 p-5 my-15 rounded-2xl macondo-regular">
+            <div className="md:flex max-md:space-y-5 items-center justify-between bg-blue-100 dark:bg-white p-5 my-15 rounded-2xl macondo-regular">
                 <div>
-                    <h1 className="font-semibold lg:text-xl text-lg">Join thousands of creators transforming their content with Clipfy</h1>
+                    <h1 className="font-semibold lg:text-xl text-lg dark:text-black">Join thousands of creators transforming their content with Clipfy</h1>
                     <h1 className=" text-gray-400 text-lg">Learn more</h1>
                 </div>
                 <div>
@@ -174,6 +175,7 @@ function LandingPage() {
                     </Link>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

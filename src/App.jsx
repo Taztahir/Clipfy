@@ -4,6 +4,7 @@ import LandingPage from "./LandingPage";
 import SignUp from "./SignUp";
 import Login from "./LogIn";
 import './App.css'
+import Footer from "./Footer";
 
 function App(){
   return(
