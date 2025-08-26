@@ -1,110 +1,130 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../Firebase";
-import { signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
+// src/pages/Dashboard.jsx
+import { useState, useEffect } from "react";
+import { auth, db, storage } from "../Firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-const Dashboard = () => {
+function Dashboard() {
   const [user, setUser] = useState(null);
-  const [displayName, setDisplayName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
-  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [profilePic, setProfilePic] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  // Load user info
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const currentUser = auth.currentUser;
+    if (currentUser) {
       setUser(currentUser);
-      if (currentUser) {
-        setDisplayName(currentUser.displayName || "");
-        setPhotoURL(currentUser.photoURL || "");
-      }
-    });
-    return () => unsubscribe();
+      setName(currentUser.displayName || "");
+      setProfilePic(currentUser.photoURL || "");
+
+      // Fetch extra info from Firestore
+      const fetchData = async () => {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setBio(userSnap.data().bio || "");
+        }
+      };
+      fetchData();
+    }
   }, []);
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    window.location.href = "/login";
+  // Handle profile image upload
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const storageRef = ref(storage, `profilePics/${user.uid}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    setProfilePic(downloadURL);
   };
 
-  const handleUpdateProfile = async () => {
-    if (auth.currentUser) {
-      await updateProfile(auth.currentUser, {
-        displayName,
-        photoURL,
+  // Save profile updates
+  const handleSave = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      // Update Firebase Auth profile
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: profilePic,
       });
-      alert("Profile updated successfully!");
-      setEditing(false);
-    }
-  };
 
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
-        <p>Loading your dashboard...</p>
-      </div>
-    );
-  }
+      // Save extra info in Firestore
+      await setDoc(doc(db, "users", user.uid), { bio }, { merge: true });
+
+      alert("✅ Profile updated successfully!");
+    } catch (error) {
+      console.error("❌ Error updating profile:", error);
+      alert("Error updating profile");
+    }
+    setLoading(false);
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-4">
-      <h1 className="text-3xl font-bold mb-6">🎉 Welcome to Your Dashboard</h1>
-
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md text-center">
-        {/* User Profile Info */}
-        {user.photoURL && (
-          <img
-            src={user.photoURL}
-            alt="profile"
-            className="w-20 h-20 rounded-full mx-auto mb-4"
-          />
-        )}
-        <h2 className="text-xl font-semibold">{user.displayName || "User"}</h2>
-        <p className="text-gray-400">{user.email}</p>
-
-        {/* Edit Profile Button */}
-        <button
-          onClick={() => setEditing(!editing)}
-          className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded"
-        >
-          {editing ? "Cancel" : "Edit Profile"}
-        </button>
-
-        {/* Edit Profile Form */}
-        {editing && (
-          <div className="mt-6 text-left">
-            <label className="block mb-2">Display Name</label>
-            <input
-              type="text"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              className="w-full px-3 py-2 mb-4 rounded bg-gray-700 text-white"
-            />
-
-            <label className="block mb-2">Photo URL</label>
-            <input
-              type="text"
-              value={photoURL}
-              onChange={(e) => setPhotoURL(e.target.value)}
-              className="w-full px-3 py-2 mb-4 rounded bg-gray-700 text-white"
-            />
-
-            <button
-              onClick={handleUpdateProfile}
-              className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 rounded"
-            >
-              Save Changes
-            </button>
-          </div>
-        )}
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-md p-6">
+        <h1 className="text-2xl font-bold text-purple-600 mb-6">Dashboard</h1>
+        <nav className="space-y-4">
+          <a href="#" className="block text-gray-700 hover:text-purple-600">Home</a>
+          <a href="#" className="block text-gray-700 hover:text-purple-600">Profile</a>
+          <a href="#" className="block text-gray-700 hover:text-purple-600">Settings</a>
+          <button 
+            className="w-full text-left text-red-500"
+            onClick={() => auth.signOut()}
+          >
+            Logout
+          </button>
+        </nav>
       </div>
 
-      {/* Logout Button */}
-      <button
-        onClick={handleLogout}
-        className="mt-6 px-6 py-2 bg-red-600 hover:bg-red-700 rounded"
-      >
-        Log Out
-      </button>
+      {/* Main Content */}
+      <div className="flex-1 p-10">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Profile Settings</h2>
+        <div className="bg-white p-6 rounded-2xl shadow-md max-w-lg">
+          {/* Profile Picture */}
+          <div className="flex items-center gap-4 mb-6">
+            <img 
+              src={profilePic || "https://via.placeholder.com/100"} 
+              alt="Profile" 
+              className="w-20 h-20 rounded-full object-cover border" 
+            />
+            <input type="file" accept="image/*" onChange={handleImageUpload} />
+          </div>
+
+          {/* Name */}
+          <label className="block mb-2 text-gray-700">Full Name</label>
+          <input 
+            type="text" 
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
+            className="w-full p-3 mb-4 border rounded-lg" 
+          />
+
+          {/* Bio */}
+          <label className="block mb-2 text-gray-700">Bio</label>
+          <textarea 
+            value={bio} 
+            onChange={(e) => setBio(e.target.value)} 
+            className="w-full p-3 mb-4 border rounded-lg"
+          />
+
+          {/* Save Button */}
+          <button 
+            onClick={handleSave} 
+            disabled={loading}
+            className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition"
+          >
+            {loading ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default Dashboard;
