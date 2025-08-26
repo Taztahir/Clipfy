@@ -1,7 +1,7 @@
 // import { Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Login from "./Login.jsx";
-import Signup from "./Signup.jsx";
+import Login from "./LogIn.jsx";
+import Signup from "./SignUp.jsx";
 import Dashboard from "./Dashboard.jsx";
 import LandingPage from "./LandingPage.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
