@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 function Footer(){
     return(
-        <div className="dark:bg-blue-950 bg-blue-100 rounded-t-2xl macondo-regular ">
+        <div className="dark:bg-blue-950 bg-blue-100 rounded-t-2xl  macondo-regular ">
         <div className="lg:flex max-lg:space-y-5 max-md:pt-10 lg:py-20 justify-between px-10 max-sm:px-5">
             <div className=" dark:text-gray-300 space-y-4">
                 {/* logo  */}

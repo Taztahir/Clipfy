@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Logo from "./Logo"
+import {Link} from "react-router-dom";
 import { auth, provider, appleProvider } from "../Firebase"; // adjust path
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -101,9 +102,9 @@ export default function Login() {
 
         <p className="mt-6 text-gray-400 text-sm text-center">
           Don’t have an account?{" "}
-          <a href="/signup" className="text-indigo-400 hover:underline">
+          <Link to="/signup" className="text-indigo-400 hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -1,5 +1,6 @@
 // src/Signup.jsx
 import React, { useEffect, useState } from "react";
+import Logo from "./Logo.jsx";
 import { auth, db, provider, appleProvider } from "../Firebase"; // <- keep exact casing to match your file
 import {
   createUserWithEmailAndPassword,
@@ -82,8 +83,11 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 px-6">
-      <div className="bg-gray-900/80 backdrop-blur-lg p-10 rounded-2xl shadow-2xl max-w-md w-full">
-        <h2 className="text-3xl font-bold text-white text-center mb-6">Create your Clipfy account</h2>
+      <div className="bg-gray-900/80 backdrop-blur-lg md:p-10 p-5 rounded-2xl shadow-2xl max-w-md w-full">
+      <div className="flex justify-center mb-2">
+      <Logo/>
+      </div>
+        <h2 className="text-3xl font-bold text-white text-center mb-6">Create An Account</h2>
 
         {message && (
           <div
