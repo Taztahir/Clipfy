@@ -1,10 +1,10 @@
 // import { Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Login from "./Login";
-import Signup from "./Signup";
-import Dashboard from "./Dashboard";
-import LandingPage from "./LandingPage";
-import PrivateRoute from "./PrivateRoute";
+import Login from "./Login.jsx";
+import Signup from "./Signup.jsx";
+import Dashboard from "./Dashboard.jsx";
+import LandingPage from "./LandingPage.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 
 import './App.css'
 
