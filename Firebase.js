@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  OAuthProvider, 
+  onAuthStateChanged 
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -15,6 +20,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Services
 const auth = getAuth(app);
 export const db = getFirestore(app);   
 export const storage = getStorage(app);
@@ -23,4 +30,11 @@ export const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 const appleProvider = new OAuthProvider("apple.com"); 
 
-export { auth, provider, appleProvider };
+// ✅ Auth state persistence helper
+const subscribeToAuthChanges = (callback) => {
+  return onAuthStateChanged(auth, (user) => {
+    callback(user);
+  });
+};
+
+export { auth, provider, appleProvider, subscribeToAuthChanges };

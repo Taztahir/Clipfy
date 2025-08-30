@@ -35,7 +35,7 @@ function Dashboard() {
         {/* <h1 className="text-2xl font-bold text-purple-500 mb-8">Clipfy</h1> */}
         <Logo className=""/>
         <nav className="mt-5 space-y-4 flex-1">
-          <a href="/Login" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>🏠</span> Dashboard
           </a>
           <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
