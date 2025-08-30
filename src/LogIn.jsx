@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import { auth, provider, appleProvider } from "../Firebase"; // adjust path
 import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Google from "./assets/Google_Icon.png"
+import Apple from "./assets/Iphone.png"
 
 export default function Login() {
   const navigate = useNavigate();
@@ -121,18 +123,29 @@ export default function Login() {
           <div className="flex-grow border-t border-gray-700"></div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="grid gap-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex-1 py-3 rounded-xl dark:bg-white bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition"
+            className="flex space-x-5 justify-center items-center py-3 rounded-xl dark:bg-gray-200 bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition"
           >
-            Google
+              <div>
+                <img src={Google} alt="" className="size-7"/>
+              </div>
+              <div>
+                Google
+              </div>
           </button>
           <button
             onClick={handleAppleLogin}
-            className="flex-1 py-3 rounded-xl bg-black text-white font-medium hover:bg-gray-800 transition"
+            className="flex space-x-5 justify-center items-center py-3 rounded-xl bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition "
           >
-            Apple
+            <div>
+              <img src={Apple} alt="" className="size-7"/>
+              
+            </div>
+            <div>
+              Apple
+            </div>
           </button>
         </div>
 

@@ -156,7 +156,7 @@ export default function Signup() {
           </button>
           <button
             onClick={handleAppleSignup}
-            className="flex items-center justify-center space-x-5 py-3 rounded-xl dark:bg-white text-gray-900 font-medium transition"
+            className="flex items-center justify-center space-x-5 py-3 rounded-xl dark:bg-white text-gray-900 hover:bg-gray-100 bg-gray-200 font-medium transition"
           >
             <div>
         <img src={Apple} alt="" className="size-7"/>
