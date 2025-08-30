@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
+import Logo from "./Logo";
 function Dashboard() {
   const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,31 +25,32 @@ function Dashboard() {
   };
 
   return (
-    <div className="flex h-screen bg-[#0f1117] text-white">
+    <div className="flex h-screen bg-gray-200 dark:bg-[#0f1117] text-white">
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:static w-64 bg-[#151922] p-6 flex flex-col z-40 transition-transform duration-300 ease-in-out`}
+        } lg:translate-x-0 lg:static w-64 dark:bg-[#151922] bg-white p-6 flex flex-col z-40 transition-transform duration-300 ease-in-out`}
       >
-        <h1 className="text-2xl font-bold text-purple-500 mb-8">Clipfy</h1>
-        <nav className="space-y-4 flex-1">
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+        {/* <h1 className="text-2xl font-bold text-purple-500 mb-8">Clipfy</h1> */}
+        <Logo className=""/>
+        <nav className="mt-5 space-y-4 flex-1">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>🏠</span> Dashboard
           </a>
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>🎬</span> My Clips
           </a>
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>✂️</span> Editor
           </a>
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>📊</span> Analytics
           </a>
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>🤖</span> AI Tools
           </a>
-          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+          <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>⚙️</span> Settings
           </a>
         </nav>

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Logo from "./Logo"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { auth, provider, appleProvider } from "../Firebase"; // adjust path
 import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Google from "./assets/Google_Icon.png"
 import Apple from "./assets/Iphone.png"
+import { Eye, EyeOff } from "lucide-react"; // 👈 icons for show/hide
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState(""); // success message
+  const [showPassword, setShowPassword] = useState(false); // 👈 toggle state
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -89,14 +91,25 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-3 rounded-xl dark:bg-gray-800 bg-gray-200 dark:text-white text-black focus:outline-none focus:ring-2 focus:ring-blue-800"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+
+          {/* 👇 Password with show/hide toggle */}
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full px-4 py-3 rounded-xl dark:bg-gray-800 bg-gray-200 dark:text-white text-black focus:outline-none focus:ring-2 focus:ring-blue-800 pr-12"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
 
           {/* Reset password link */}
           <div className="text-right">
@@ -128,12 +141,12 @@ export default function Login() {
             onClick={handleGoogleLogin}
             className="flex space-x-5 justify-center items-center py-3 rounded-xl dark:bg-white bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition"
           >
-              <div>
-                <img src={Google} alt="" className="size-7"/>
-              </div>
-              <div>
-                Google
-              </div>
+            <div>
+              <img src={Google} alt="" className="size-7"/>
+            </div>
+            <div>
+              Google
+            </div>
           </button>
           <button
             onClick={handleAppleLogin}
@@ -141,7 +154,6 @@ export default function Login() {
           >
             <div>
               <img src={Apple} alt="" className="size-7"/>
-              
             </div>
             <div>
               Apple
