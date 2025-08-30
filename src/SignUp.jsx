@@ -85,7 +85,7 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gradient-to-br from-gray-900 via-black to-gray-800 px-6">
-      <div className="dark:bg-gray-900/80 bg-white backdrop-blur-lg md:py-7 md:px-10 p-5 rounded-2xl shadow-2xl max-w-md w-full">
+      <div className="dark:bg-[#0F172A] bg-white backdrop-blur-lg md:py-7 md:px-10 p-5 rounded-2xl shadow-2xl max-w-md w-full">
         <div className="flex justify-center mb-2">
           {/* <Logo/> */}
         </div>
