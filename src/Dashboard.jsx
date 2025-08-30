@@ -1,128 +1,172 @@
 // src/pages/Dashboard.jsx
 import { useState, useEffect } from "react";
-import { auth, db, storage } from "../Firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { updateProfile } from "firebase/auth";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { auth } from "../Firebase";
+import { useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [profilePic, setProfilePic] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Load user info
   useEffect(() => {
     const currentUser = auth.currentUser;
     if (currentUser) {
       setUser(currentUser);
-      setName(currentUser.displayName || "");
-      setProfilePic(currentUser.photoURL || "");
-
-      // Fetch extra info from Firestore
-      const fetchData = async () => {
-        const userRef = doc(db, "users", currentUser.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          setBio(userSnap.data().bio || "");
-        }
-      };
-      fetchData();
+    } else {
+      navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
-  // Handle profile image upload
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const storageRef = ref(storage, `profilePics/${user.uid}`);
-    await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(storageRef);
-    setProfilePic(downloadURL);
-  };
-
-  // Save profile updates
-  const handleSave = async () => {
-    if (!user) return;
-    setLoading(true);
-    try {
-      // Update Firebase Auth profile
-      await updateProfile(user, {
-        displayName: name,
-        photoURL: profilePic,
-      });
-
-      // Save extra info in Firestore
-      await setDoc(doc(db, "users", user.uid), { bio }, { merge: true });
-
-      alert("✅ Profile updated successfully!");
-    } catch (error) {
-      console.error("❌ Error updating profile:", error);
-      alert("Error updating profile");
-    }
-    setLoading(false);
+  const handleLogout = async () => {
+    await auth.signOut();
+    navigate("/login");
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-[#0f1117] text-white">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md p-6">
-        <h1 className="text-2xl font-bold text-purple-600 mb-6">Dashboard</h1>
-        <nav className="space-y-4">
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Home</a>
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Profile</a>
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Settings</a>
-          <button 
-            className="w-full text-left text-red-500"
-            onClick={() => auth.signOut()}
-          >
-            Logout
-          </button>
+      <aside
+        className={`fixed inset-y-0 left-0 transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 lg:static w-64 bg-[#151922] p-6 flex flex-col z-40 transition-transform duration-300 ease-in-out`}
+      >
+        <h1 className="text-2xl font-bold text-purple-500 mb-8">Clipfy</h1>
+        <nav className="space-y-4 flex-1">
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>🏠</span> Dashboard
+          </a>
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>🎬</span> My Clips
+          </a>
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>✂️</span> Editor
+          </a>
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>📊</span> Analytics
+          </a>
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>🤖</span> AI Tools
+          </a>
+          <a href="#" className="flex items-center gap-2 text-gray-300 hover:text-white">
+            <span>⚙️</span> Settings
+          </a>
         </nav>
-      </div>
+        <button
+          onClick={handleLogout}
+          className="mt-auto w-full py-2 bg-red-600 hover:bg-red-700 rounded-lg"
+        >
+          Logout
+        </button>
+      </aside>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Main Content */}
-      <div className="flex-1 p-10">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6">Profile Settings</h2>
-        <div className="bg-white p-6 rounded-2xl shadow-md max-w-lg">
-          {/* Profile Picture */}
-          <div className="flex items-center gap-4 mb-6">
-            <img 
-              src={profilePic || "https://via.placeholder.com/100"} 
-              alt="Profile" 
-              className="w-20 h-20 rounded-full object-cover border" 
-            />
-            <input type="file" accept="image/*" onChange={handleImageUpload} />
-          </div>
-
-          {/* Name */}
-          <label className="block mb-2 text-gray-700">Full Name</label>
-          <input 
-            type="text" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
-            className="w-full p-3 mb-4 border rounded-lg" 
-          />
-
-          {/* Bio */}
-          <label className="block mb-2 text-gray-700">Bio</label>
-          <textarea 
-            value={bio} 
-            onChange={(e) => setBio(e.target.value)} 
-            className="w-full p-3 mb-4 border rounded-lg"
-          />
-
-          {/* Save Button */}
-          <button 
-            onClick={handleSave} 
-            disabled={loading}
-            className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition"
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <button
+            className="lg:hidden text-gray-400"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
           >
-            {loading ? "Saving..." : "Save Changes"}
+            {sidebarOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
+
+          <input
+            type="text"
+            placeholder="Search"
+            className="hidden sm:block bg-[#1c1f2b] text-gray-300 px-4 py-2 rounded-lg w-60 md:w-80 focus:outline-none"
+          />
+
+          <div className="flex items-center gap-4 ml-auto">
+            <button className="text-gray-400">🔔</button>
+            {user && (
+              <img
+                src={user.photoURL || "https://via.placeholder.com/40"}
+                alt="Profile"
+                className="w-10 h-10 rounded-full border border-gray-700"
+              />
+            )}
+          </div>
         </div>
-      </div>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+            <p className="text-gray-400">Views</p>
+            <h2 className="text-2xl font-bold">12.4K</h2>
+          </div>
+          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+            <p className="text-gray-400">Engagement</p>
+            <h2 className="text-2xl font-bold">4.3K</h2>
+          </div>
+          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+            <p className="text-gray-400">Watch Time</p>
+            <h2 className="text-2xl font-bold">33.1 h</h2>
+          </div>
+          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+            <p className="text-gray-400">Subscribers</p>
+            <h2 className="text-2xl font-bold">1.1K</h2>
+          </div>
+        </div>
+
+        {/* Recent Uploads */}
+        <div className="bg-[#151922] p-6 rounded-xl shadow-md mb-8 overflow-x-auto">
+          <h3 className="text-lg font-semibold mb-4">Recent Uploads</h3>
+          <table className="w-full min-w-[600px] text-left text-gray-300">
+            <thead>
+              <tr className="text-gray-500 text-sm">
+                <th className="pb-2">Title</th>
+                <th className="pb-2">Date</th>
+                <th className="pb-2">Status</th>
+                <th className="pb-2">Views</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              <tr className="border-t border-gray-700">
+                <td className="py-3">🎥 Photoshop Tips & Tricks</td>
+                <td>Jun 12, 2023</td>
+                <td><span className="text-green-400">Public</span></td>
+                <td>1.5K</td>
+              </tr>
+              <tr className="border-t border-gray-700">
+                <td className="py-3">🎥 Vlogging: A Beginner's Guide</td>
+                <td>Jun 10, 2023</td>
+                <td><span className="text-green-400">Public</span></td>
+                <td>2.9K</td>
+              </tr>
+              <tr className="border-t border-gray-700">
+                <td className="py-3">🎥 The Future of AI</td>
+                <td>Jun 8, 2023</td>
+                <td><span className="text-red-400">Private</span></td>
+                <td>980</td>
+              </tr>
+              <tr className="border-t border-gray-700">
+                <td className="py-3">🎥 How to Start a Podcast</td>
+                <td>Jun 5, 2023</td>
+                <td><span className="text-green-400">Public</span></td>
+                <td>1.1K</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* AI Suggestions */}
+        <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+          <h3 className="text-lg font-semibold mb-3">AI Suggestions</h3>
+          <p className="flex items-center gap-2 text-blue-400">
+            ▶ Best time to post today <span className="text-gray-300">6 PM</span>
+          </p>
+        </div>
+      </main>
     </div>
   );
 }

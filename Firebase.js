@@ -1,4 +1,3 @@
-// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -22,6 +21,6 @@ export const storage = getStorage(app);
 
 // Providers
 const provider = new GoogleAuthProvider();
-const appleProvider = new OAuthProvider("apple.com"); // 👈 Apple provider
+const appleProvider = new OAuthProvider("apple.com"); 
 
 export { auth, provider, appleProvider };

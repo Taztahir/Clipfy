@@ -126,7 +126,7 @@ export default function Login() {
         <div className="grid gap-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex space-x-5 justify-center items-center py-3 rounded-xl dark:bg-gray-200 bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition"
+            className="flex space-x-5 justify-center items-center py-3 rounded-xl dark:bg-white bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition"
           >
               <div>
                 <img src={Google} alt="" className="size-7"/>
@@ -137,7 +137,7 @@ export default function Login() {
           </button>
           <button
             onClick={handleAppleLogin}
-            className="flex space-x-5 justify-center items-center py-3 rounded-xl bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition "
+            className="flex space-x-5 justify-center items-center py-3 rounded-xl dark:bg-white bg-gray-200 text-gray-900 font-medium hover:bg-gray-100 transition "
           >
             <div>
               <img src={Apple} alt="" className="size-7"/>
