@@ -42,8 +42,8 @@ function Features() {
                     {/* links  */}
                     <div className="space-x-10 max-lg:hidden font-sans font-semibold macondo-regular">
                         <Link to="/">Home</Link>
-                        <Link to="/features">Features</Link>
-                        <Link to="">Pricing</Link>
+                        <Link href="/Features">Features</Link>
+                        <Link to="/pricing">Pricing</Link>
                         <Link to="/">Blog</Link>
                         
                     </div>
@@ -92,8 +92,8 @@ function Features() {
         </div>
         <ul className="flex flex-col space-y-5 text-center py-10 px-20 text-lg">
           <Link className="border-b-1 pb-5" to="/">Home</Link>
-          <Link className="border-b-1 pb-5" to="/features">Features</Link>
-          <Link className="border-b-1 pb-5" to="">Pricing</Link>
+          <a className="border-b-1 pb-5" href="/Features">Features</a>
+          <Link className="border-b-1 pb-5" to="/pricing">Pricing</Link>
           <Link className="border-b-1 pb-5" to="">Blog</Link>
           {/* Log in buttons  */}
                     <div className="">
@@ -117,7 +117,7 @@ function Features() {
             </div>
             {/* header  */}
             <header className="my-10 lg:px-20">
-                 <h1 className="md:text-7xl  text-6xl macondo-regular text-center">Discover the tools that make Clipfy smarter, faster, and easier to use.</h1>
+                 <h1 className="md:text-7xl  text-6xl macondo-bold text-center">Discover the tools that make Clipfy smarter, faster, and easier to use.</h1>
                  <p className="md:text-2xl text-center py-2 font-extralight px-5 lg:px-20">From AI-powered editing to seamless collaboration, Clipfy gives you everything you need to create with confidence.</p>
             </header>
             {/* features  */}
