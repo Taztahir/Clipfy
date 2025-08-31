@@ -118,11 +118,11 @@ function Features() {
             {/* header  */}
             <header className="my-10 lg:px-20">
                  <h1 className="md:text-7xl  text-6xl macondo-regular text-center">Discover the tools that make Clipfy smarter, faster, and easier to use.</h1>
-                 <p className="md:text-2xl text-center py-2 font-extralight px-5 lg:px-20">From AI-powered editing to seamless collaboration, Clipfy gives you everything you need to create with confidence</p>
+                 <p className="md:text-2xl text-center py-2 font-extralight px-5 lg:px-20">From AI-powered editing to seamless collaboration, Clipfy gives you everything you need to create with confidence.</p>
             </header>
             {/* features  */}
             <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl  macondo-regular bg-gradient-to-r from-[#9C6CFF] to-[#FF4D97] shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={Folder} alt="" className="size-40 dark:hidden"/>
@@ -152,7 +152,7 @@ function Features() {
                         <p className="text-xl font-extralight">Protect your account <br /> with Google & Apple auth.</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl macondo-regular bg-gradient-to-r from-[#9C6CFF] to-[#FF4D97] shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={palette} alt="" className="size-40 dark:hidden"/>
@@ -182,7 +182,7 @@ function Features() {
                         <p className="text-xl font-extralight">Store all your files <br /> safely in the cloud.</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl macondo-regular bg-gradient-to-r from-[#9C6CFF] to-[#FF4D97] shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={responsiveness} alt="" className="size-40 dark:hidden"/>
@@ -194,7 +194,7 @@ function Features() {
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Works smo0thly on <br /> desktop, tablet & mobile.</p>
+                        <p className="text-xl font-extralight">Works smoothly on <br /> desktop, tablet & mobile.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
