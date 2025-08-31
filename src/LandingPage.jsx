@@ -30,7 +30,7 @@ function LandingPage() {
                     {/* links  */}
                     <div className="space-x-10 max-lg:hidden font-sans font-semibold macondo-regular">
                         <Link to="/">Home</Link>
-                        <Link to="">Features</Link>
+                        <Link to="/Features">Features</Link>
                         <Link to="">Pricing</Link>
                         <Link to="/">Blog</Link>
                         

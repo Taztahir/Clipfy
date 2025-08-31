@@ -5,6 +5,7 @@ import Signup from "./SignUp.jsx";
 import Dashboard from "./Dashboard.jsx";
 import LandingPage from "./LandingPage.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import Features from "./Features.jsx";
 
 import './App.css'
 
@@ -16,6 +17,10 @@ function App(){
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/features" element={<Features/>}/>
+        {/* <Route path="/pricing" element={<Pricing/>}/>
+        <Route path="/blog" element={<Blog/>}/> */}
+        
 
          {/* Protected Route */}
         <Route 

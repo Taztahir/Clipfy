@@ -4,10 +4,25 @@ import { auth } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
+
 function Dashboard() {
   const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  // Example uploads data (replace with Firestore later)
+  const [uploads] = useState([
+    { title: "🎥 Photoshop Tips & Tricks", date: "Jun 12, 2023", status: "Public", views: "1.5K" },
+    { title: "🎥 Vlogging: A Beginner's Guide", date: "Jun 10, 2023", status: "Public", views: "2.9K" },
+    { title: "🎥 The Future of AI", date: "Jun 8, 2023", status: "Private", views: "980" },
+    { title: "🎥 How to Start a Podcast", date: "Jun 5, 2023", status: "Public", views: "1.1K" },
+  ]);
+
+  // Filter uploads based on search
+  const filteredUploads = uploads.filter(upload =>
+    upload.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Load user info
   useEffect(() => {
@@ -32,8 +47,7 @@ function Dashboard() {
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:static w-64 dark:bg-[#151922] bg-white p-6 flex flex-col z-40 transition-transform duration-300 ease-in-out`}
       >
-        {/* <h1 className="text-2xl font-bold text-purple-500 mb-8">Clipfy</h1> */}
-        <Logo className=""/>
+        <Logo className="" />
         <nav className="mt-5 space-y-4 flex-1">
           <a href="#" className="flex items-center gap-2 text-black dark:text-gray-300 dark:hover:text-white">
             <span>🏠</span> Dashboard
@@ -84,6 +98,8 @@ function Dashboard() {
           <input
             type="text"
             placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="hidden sm:block bg-[#1c1f2b] text-gray-300 px-4 py-2 rounded-lg w-60 md:w-80 focus:outline-none"
           />
 
@@ -100,29 +116,29 @@ function Dashboard() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="dark:bg-[#151922] bg-white p-6 rounded-xl shadow-md">
             <p className="text-gray-400">Views</p>
-            <h2 className="text-2xl font-bold">12.4K</h2>
+            <h2 className="dark:text-white text-[#151922] text-2xl font-bold">12.4K</h2>
           </div>
-          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+          <div className="dark:bg-[#151922] bg-white p-6 rounded-xl shadow-md">
             <p className="text-gray-400">Engagement</p>
-            <h2 className="text-2xl font-bold">4.3K</h2>
+            <h2 className="dark:text-white text-[#151922] text-2xl font-bold">4.3K</h2>
           </div>
-          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+          <div className="dark:bg-[#151922] bg-white p-6 rounded-xl shadow-md">
             <p className="text-gray-400">Watch Time</p>
-            <h2 className="text-2xl font-bold">33.1 h</h2>
+            <h2 className="dark:text-white text-[#151922] text-2xl font-bold">33.1 h</h2>
           </div>
-          <div className="bg-[#151922] p-6 rounded-xl shadow-md">
+          <div className="dark:bg-[#151922] bg-white p-6 rounded-xl shadow-md">
             <p className="text-gray-400">Subscribers</p>
-            <h2 className="text-2xl font-bold">1.1K</h2>
+            <h2 className="dark:text-white text-[#151922] text-2xl font-bold">1.1K</h2>
           </div>
         </div>
 
         {/* Recent Uploads */}
-        <div className="bg-[#151922] p-6 rounded-xl shadow-md mb-8 overflow-x-auto">
-          <h3 className="text-lg font-semibold mb-4">Recent Uploads</h3>
-          <table className="w-full min-w-[600px] text-left text-gray-300">
+        <div className="dark:bg-[#151922] bg-white p-6 rounded-xl shadow-md mb-8 overflow-x-auto">
+          <h3 className="dark:text-white text-[#151922] text-lg font-semibold mb-4">Recent Uploads</h3>
+          <table className="w-full min-w-[600px] text-left dark:text-gray-300 text-[#151922]">
             <thead>
               <tr className="text-gray-500 text-sm">
                 <th className="pb-2">Title</th>
@@ -132,30 +148,24 @@ function Dashboard() {
               </tr>
             </thead>
             <tbody className="text-sm">
-              <tr className="border-t border-gray-700">
-                <td className="py-3">🎥 Photoshop Tips & Tricks</td>
-                <td>Jun 12, 2023</td>
-                <td><span className="text-green-400">Public</span></td>
-                <td>1.5K</td>
-              </tr>
-              <tr className="border-t border-gray-700">
-                <td className="py-3">🎥 Vlogging: A Beginner's Guide</td>
-                <td>Jun 10, 2023</td>
-                <td><span className="text-green-400">Public</span></td>
-                <td>2.9K</td>
-              </tr>
-              <tr className="border-t border-gray-700">
-                <td className="py-3">🎥 The Future of AI</td>
-                <td>Jun 8, 2023</td>
-                <td><span className="text-red-400">Private</span></td>
-                <td>980</td>
-              </tr>
-              <tr className="border-t border-gray-700">
-                <td className="py-3">🎥 How to Start a Podcast</td>
-                <td>Jun 5, 2023</td>
-                <td><span className="text-green-400">Public</span></td>
-                <td>1.1K</td>
-              </tr>
+              {filteredUploads.length > 0 ? (
+                filteredUploads.map((upload, idx) => (
+                  <tr key={idx} className="border-t border-gray-700">
+                    <td className="py-3">{upload.title}</td>
+                    <td>{upload.date}</td>
+                    <td>
+                      <span className={upload.status === "Public" ? "text-green-400" : "text-red-400"}>
+                        {upload.status}
+                      </span>
+                    </td>
+                    <td>{upload.views}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="py-3 text-center text-gray-400">No results found</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
