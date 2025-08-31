@@ -22,7 +22,7 @@ function Footer(){
                 <div className="dark:text-gray-300 text-lg grid">
                     <h1 className="font-bold text-xl pb-2 dark:text-white">Quick Links</h1>
                     <Link className="hover:text-blue-600 duration-300 ease-in-out " to="/">Home</Link>
-                    <Link className="hover:text-blue-600 duration-300 ease-in-out " to="">Features</Link>
+                    <Link className="hover:text-blue-600 duration-300 ease-in-out " to="/features">Features</Link>
                     <Link className="hover:text-blue-600 duration-300 ease-in-out " to="">Pricing</Link>
                     <Link className="hover:text-blue-600 duration-300 ease-in-out " to="/">Blog</Link>
                     <Link className="hover:text-blue-600 duration-300 ease-in-out " to="/">Contact Us</Link>
