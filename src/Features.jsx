@@ -134,7 +134,7 @@ function Features() {
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
@@ -145,11 +145,11 @@ function Features() {
                     </div>
                     {/* heading  */}
                     <div className="py-1">
-                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Easy File Sharing</h1>
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Secure Login</h1>
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Protect your account <br /> with Google & Apple auth.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
@@ -160,11 +160,11 @@ function Features() {
                     </div>
                     {/* heading  */}
                     <div className="py-1">
-                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Easy File Sharing</h1>
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Custom Dashboard</h1>
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Manage your profile <br /> edit name & image easily.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
@@ -175,11 +175,11 @@ function Features() {
                     </div>
                     {/* heading  */}
                     <div className="py-1">
-                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Easy File Sharing</h1>
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Cloud Storage</h1>
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Store all your files <br /> safely in the cloud.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
@@ -190,11 +190,11 @@ function Features() {
                     </div>
                     {/* heading  */}
                     <div className="py-1">
-                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Easy File Sharing</h1>
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Responsive Design</h1>
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Works smo0thly on <br /> desktop, tablet & mobile.</p>
                     </div>
                 </div>
                 <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
@@ -205,11 +205,11 @@ function Features() {
                     </div>
                     {/* heading  */}
                     <div className="py-1">
-                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Easy File Sharing</h1>
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Fast Perfomance</h1>
                     </div>
                     {/* description  */}
                     <div>
-                        <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
+                        <p className="text-xl font-extralight">Optimized for speed <br /> with Firebase backend.</p>
                     </div>
                 </div>
             </section>
