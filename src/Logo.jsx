@@ -22,7 +22,7 @@ export default function Logo() {
         fontFamily="Arial, sans-serif"
         fontSize="28"
         fontWeight="bold"
-        className="fill-black dark:fill-white font-sans"
+        className="fill-black dark:fill-white macondo-bold"
       >
         Clipfy
       </text>
