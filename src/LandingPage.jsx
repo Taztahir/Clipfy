@@ -80,7 +80,7 @@ function LandingPage() {
         </div>
         <ul className="flex flex-col space-y-5 text-center py-10 px-20 text-lg">
           <Link className="border-b-1 pb-5" to="/">Home</Link>
-          <Link className="border-b-1 pb-5" to="">Features</Link>
+          <Link className="border-b-1 pb-5" to="/features">Features</Link>
           <Link className="border-b-1 pb-5" to="">Pricing</Link>
           <Link className="border-b-1 pb-5" to="/">Blog</Link>
           {/* Log in buttons  */}
