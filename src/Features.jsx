@@ -122,7 +122,7 @@ function Features() {
             </header>
             {/* features  */}
             <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={Folder} alt="" className="size-40 dark:hidden"/>
@@ -137,7 +137,7 @@ function Features() {
                         <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={secure} alt="" className="size-40 dark:hidden"/>
@@ -152,7 +152,7 @@ function Features() {
                         <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={palette} alt="" className="size-40 dark:hidden"/>
@@ -167,7 +167,7 @@ function Features() {
                         <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={cloud} alt="" className="size-40 dark:hidden"/>
@@ -182,7 +182,7 @@ function Features() {
                         <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={responsiveness} alt="" className="size-40 dark:hidden"/>
@@ -197,7 +197,7 @@ function Features() {
                         <p className="text-xl font-extralight">Instantly upload and <br /> share files securely</p>
                     </div>
                 </div>
-                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100 macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">
                         <img src={flash} alt="" className="size-40 dark:hidden"/>
