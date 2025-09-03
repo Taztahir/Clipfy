@@ -23,9 +23,9 @@ function Footer(){
                     <h1 className="font-bold text-xl pb-2 dark:text-white">Quick Links</h1>
                     <a href="/" className="hover:text-blue-600 duration-300 ease-in-out ">Home</a>
                     <a href="/Features" className="hover:text-blue-600 duration-300 ease-in-out ">Features</a>
-                    <a href="" className="hover:text-blue-600 duration-300 ease-in-out " >Pricing</a>
-                    <a href="" className="hover:text-blue-600 duration-300 ease-in-out " >Blog</a>
-                    <a href="" className="hover:text-blue-600 duration-300 ease-in-out " >Contact Us</a>
+                    <a href="/Pricing" className="hover:text-blue-600 duration-300 ease-in-out " >Pricing</a>
+                    <a href="/Blog" className="hover:text-blue-600 duration-300 ease-in-out " >Blog</a>
+                    <a href="/contact" className="hover:text-blue-600 duration-300 ease-in-out " >Contact Us</a>
 
                 </div>
                 {/* Features  */}

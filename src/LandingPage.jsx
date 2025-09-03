@@ -32,7 +32,7 @@ function LandingPage() {
                         <Link to="/">Home</Link>
                         <Link to="/Features">Features</Link>
                         <Link to="/pricing">Pricing</Link>
-                        <Link to="/">Blog</Link>
+                        <Link to="/blog">Blog</Link>
                         
                     </div>
                     {/* Log in buttons  */}
@@ -82,7 +82,8 @@ function LandingPage() {
           <Link className="border-b-1 pb-5" to="/">Home</Link>
           <Link className="border-b-1 pb-5" to="/features">Features</Link>
           <Link className="border-b-1 pb-5" to="/pricing">Pricing</Link>
-          <Link className="border-b-1 pb-5" to="/">Blog</Link>
+          <Link className="border-b-1 pb-5" to="/blog">Blog</Link>
+          <Link className="border-b-1 pb-5" to="/contact">Contact</Link>
           {/* Log in buttons  */}
                     <div className="">
                         <Link to="/login">
