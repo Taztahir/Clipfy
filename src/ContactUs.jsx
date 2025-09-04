@@ -187,11 +187,11 @@ function ContactUs() {
         </div>
 
         {/* Contact Info */}
-        <div className="bg-white dark:bg-gradient-to-r from-[#8C52FF] to-[#FF4B8C] p-8 rounded-2xl shadow-lg space-y-6">
+        <div className="bg-gradient-to-r from-[#8C52FF] to-[#FF4B8C] p-8 rounded-2xl shadow-lg space-y-6">
           <h2 className="text-2xl font-bold mb-6">Contact Info</h2>
           <div className="macondo-regular">
             <p className="text-lg font-semibold text-gray-900">Email</p>
-            <p className="font-medium">support@clipfy.ai</p>
+            <p className="font-medium">clipfysaas@gmail.com</p>
           </div>
           <div className="macondo-regular">
             <p className="text-lg font-semibold text-gray-900">Phone</p>
