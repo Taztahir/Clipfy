@@ -196,6 +196,7 @@ function ContactUs() {
           <div className="macondo-regular">
             <p className="text-lg font-semibold text-gray-900">Phone</p>
             <p className="font-medium">+234 906 072 0810</p>
+            <p className="font-medium">+234 707 967 4224</p>
           </div>
           <div className="macondo-regular">
             <p className="text-lg font-semibold text-gray-900">Address</p>
