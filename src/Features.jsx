@@ -123,6 +123,48 @@ function Features() {
             </header>
             {/* features  */}
             <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100  macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                    {/* image  */}
+                    <div className="flex justify-center py-2">
+                        <Sparkles className="size-40 text-[#0F172A] dark:text-white"/>
+                    </div>
+                    {/* heading  */}
+                    <div className="py-1">
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">AI Smart Editing</h1>
+                    </div>
+                    {/* description  */}
+                    <div>
+                        <p className="text-xl font-extralight">Turn clips into pro videos <br /> in seconds with AI editing.</p>
+                    </div>
+                </div>
+                <div className="text-center border-2 py-10 rounded-2xl  macondo-regular bg-gradient-to-r from-[#9C6CFF] to-[#FF4D97] shadow-2xl ease-in-out duration-200">
+                    {/* image  */}
+                    <div className="flex justify-center py-2">
+                        <Captions className="size-40 text-[#0F172A] dark:text-white"/>
+                    </div>
+                    {/* heading  */}
+                    <div className="py-1">
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Auto Captions</h1>
+                    </div>
+                    {/* description  */}
+                    <div>
+                        <p className="text-xl font-extralight">Auto-generate captions <br /> to boost engagement.</p>
+                    </div>
+                </div>
+                <div className="text-center border-2 py-10 rounded-2xl bg-blue-100  macondo-regular dark:bg-blue-950 shadow-2xl ease-in-out duration-200">
+                    {/* image  */}
+                    <div className="flex justify-center py-2">
+                        <LineChart className="size-40 text-[#0F172A] dark:text-white"/>
+                    </div>
+                    {/* heading  */}
+                    <div className="py-1">
+                        <h1 className="text-[#0F172A] dark:text-white font-bold text-3xl">Trend Insight</h1>
+                    </div>
+                    {/* description  */}
+                    <div>
+                        <p className="text-xl font-extralight">AI insights to spot <br /> trends and go viral.</p>
+                    </div>
+                </div>
                 <div className="text-center border-2 py-10 rounded-2xl  macondo-regular bg-gradient-to-r from-[#9C6CFF] to-[#FF4D97] shadow-2xl ease-in-out duration-200">
                     {/* image  */}
                     <div className="flex justify-center py-2">

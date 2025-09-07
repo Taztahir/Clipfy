@@ -31,10 +31,10 @@ function Footer(){
                 {/* Features  */}
                 <div className="dark:text-gray-300 text-lg grid">
                     <h1 className="font-bold text-xl pb-2 dark:text-white">Features</h1>
-                    <Link className="hover:text-blue-600 duration-300 ease-in-out" to="/">AI Smart Editing</Link>
-                    <Link className="hover:text-blue-600 duration-300 ease-in-out" to="">Auto Captions</Link>
-                    <Link className="hover:text-blue-600 duration-300 ease-in-out" to="">Trend Insight</Link>
-                    <Link className="hover:text-blue-600 duration-300 ease-in-out" to="/">Collaboration Tools</Link>
+                    <a className="hover:text-blue-600 duration-300 ease-in-out" href="./Features">AI Smart Editing</a>
+                    <a className="hover:text-blue-600 duration-300 ease-in-out" href="./Features">Auto Captions</a>
+                    <a className="hover:text-blue-600 duration-300 ease-in-out" href="./Features">Trend Insight</a>
+                    <a className="hover:text-blue-600 duration-300 ease-in-out" href="./Features">Collaboration Tools</a>
                 </div>
                 {/* Follow us  */}
                 <div className="dark:text-white">

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 // import LandingPage from "./LandingPage";
 import Footer from "./Footer";
+import ClipfyGif from './assets/gif/Clipfy-gif.gif'
 import ClipfyMockup from './assets/image/Clipfy-Adevertisement.png'
 
 function LandingPage() {
@@ -123,8 +124,8 @@ function LandingPage() {
                         <button className="bg-white px-10 py-3 text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-white text-2xl dark:border-0 border-2 hover:-translate-y-1 transition-all duration-300 ">Watch Demo</button>
                     </div>
                 </div>
-                <div className="border-15 border-gray-200">
-                    <img src={ClipfyMockup} alt="" />
+                <div className="border-10 border-gray-200">
+                    <img src={ClipfyGif} alt="" />
                 </div>
             </header>
             <div className="grid max-lg:gap-10 gap-5 lg:grid-cols-3"> 

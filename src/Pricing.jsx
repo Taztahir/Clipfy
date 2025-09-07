@@ -82,7 +82,7 @@ function Pricing() {
                         <Link to="/">Home</Link>
                         <Link to="/Features">Features</Link>
                         <Link href="/Pricing">Pricing</Link>
-                        <a href="https://www.superpath.co/blog" target="_blank">Blog</a>
+                        <a href="/blog" target="_blank">Blog</a>
                         
                     </div>
                     {/* Log in buttons  */}
@@ -132,7 +132,7 @@ function Pricing() {
           <Link className="border-b-1 pb-5" to="/">Home</Link>
           <Link className="border-b-1 pb-5" to="/features">Features</Link>
           <a href="/Pricing" className="border-b-1 pb-5">Pricing</a>
-          <a className="border-b-1 pb-5" href="https://www.superpath.co/blog">Blog</a>
+          <a className="border-b-1 pb-5" href="/blog">Blog</a>
           <Link className="border-b-1 pb-5" to="/contact">Contact</Link>
           {/* Log in buttons  */}
                     <div className="">

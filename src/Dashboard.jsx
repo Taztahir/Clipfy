@@ -16,6 +16,7 @@ import {
   Bell,
   Search,
 } from "lucide-react";
+import Logo from "./Logo";
 
 export default function Dashboard() {
   const [active, setActive] = useState("dashboard");
@@ -75,8 +76,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-3">
               {/* Logo */}
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-md bg-gradient-to-br from-violet-500 to-pink-500" />
-                <span className="font-extrabold tracking-tight">Clipfy</span>
+                <Logo/>
               </div>
               {/* Search */}
               <div className="hidden md:flex items-center ml-6">
