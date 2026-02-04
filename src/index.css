@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+@theme {
+    --color-void: #ffffff;
+    --color-glass: rgba(0, 0, 0, 0.05);
+    --color-glass-hover: rgba(0, 0, 0, 0.1);
+    --color-accent: #7000df;
+    --color-success: #00ff88;
+    --color-error: #ff3333;
+    --color-warning: #ffcc00;
+
+
+    --font-sans: Inter, sans-serif;
+
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-in-fade: fadeIn 0.5s ease-out forwards;
+
+    --shadow-brutal: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-brutal-lg: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-brutal-xl: 12px 12px 0px 0px rgba(112, 0, 223, 1);
+    --shadow-brutal-primary: 6px 6px 0px 0px rgba(112, 0, 223, 1);
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@utility brutal-panel {
+    @apply bg-white border-2 border-black shadow-brutal transition-all duration-200;
+}
+
+@utility brutal-card {
+    @apply bg-white border-2 border-black shadow-brutal-lg hover:shadow-brutal-xl hover:-translate-x-1 hover:-translate-y-1 transition-all duration-300;
+}
+
+@utility brutal-button {
+    @apply bg-white text-black border-2 border-black font-black uppercase tracking-tighter px-4 py-2 shadow-brutal hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 active:scale-95;
+}
+
+@utility brutal-button-primary {
+    @apply bg-black text-white border-2 border-black font-black uppercase tracking-widest px-6 py-3 shadow-brutal-primary hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 active:scale-95;
+}
+
+@utility brutal-button-ghost {
+    @apply bg-transparent text-black border-2 border-black/20 font-black uppercase tracking-widest px-6 py-3 hover:border-black hover:bg-black/5 transition-all duration-200;
+}
+
+@utility brutal-container {
+    @apply max-w-7xl mx-auto px-6 md:px-12 w-full;
+}
+
+/* Base Styles */
+:root {
+    --background: 255 255 255;
+    --foreground: 0 0 0;
+}
+
+body {
+    @apply bg-white text-black antialiased overflow-x-hidden selection:bg-accent/10;
+}
