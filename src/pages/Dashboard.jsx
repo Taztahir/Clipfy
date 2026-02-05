@@ -54,23 +54,32 @@ export default function Dashboard() {
         navigate("/login");
     };
 
-    const handleCreateProject = async () => {
+    const handleCreateProject = async (promptText = "") => {
         try {
-            addToast({ title: "Initializing Neural Engine...", type: "default" });
+            const loadingMsg = promptText
+                ? "Synthesizing Neural Sequence..."
+                : "Initializing Neural Engine...";
+
+            addToast({ title: loadingMsg, type: "default" });
+
             const docRef = await addDoc(collection(db, "projects"), {
-                title: "Untitled Sequence",
+                title: promptText || "Untitled Sequence",
                 createdAt: new Date(),
                 userId: currentUser?.uid,
                 status: "draft",
                 duration: 60,
                 tracks: [
-                    { id: 'track-1', label: 'Video 1', clips: [] },
+                    {
+                        id: 'track-1', label: 'Video 1', clips: promptText ? [
+                            { id: 'c1', name: 'AI_Generated_Asset.mp4', start: 0, duration: 10, type: 'video' }
+                        ] : []
+                    },
                     { id: 'track-2', label: 'Audio 1', clips: [] }
                 ]
             });
 
             addToast({
-                title: "Project Initialized",
+                title: promptText ? "Sequence Synthesized" : "Project Initialized",
                 description: "Redirecting to workspace...",
                 type: "success"
             });
@@ -149,13 +158,26 @@ export default function Dashboard() {
                         collapsed={isSidebarCollapsed}
                     />
 
-                    <div className={cn("mt-6 flex items-center gap-3 px-3 py-3 border-2 border-black bg-gray-50", isSidebarCollapsed && "justify-center px-0")}>
-                        <Avatar src={currentUser?.photoURL} fallback={currentUser?.displayName?.charAt(0) || "U"} size="sm" className="border-2 border-black" />
+                    <div className={cn("mt-6 flex flex-col gap-3 px-3 py-3 border-2 border-black bg-gray-50", isSidebarCollapsed && "items-center px-0")}>
+                        <div className="flex items-center gap-3">
+                            <Avatar src={currentUser?.photoURL} fallback={currentUser?.displayName?.charAt(0) || "U"} size="sm" className="border-2 border-black" />
+                            {!isSidebarCollapsed && (
+                                <div className="flex-1 overflow-hidden">
+                                    <p className="text-[10px] font-black uppercase truncate">{currentUser?.displayName || "User"}</p>
+                                    <p className="text-[9px] font-bold text-black/40 truncate uppercase tracking-widest">{currentUser?.email}</p>
+                                </div>
+                            )}
+                        </div>
 
                         {!isSidebarCollapsed && (
-                            <div className="flex-1 overflow-hidden">
-                                <p className="text-[10px] font-black uppercase truncate">{currentUser?.displayName || "User"}</p>
-                                <p className="text-[9px] font-bold text-black/40 truncate uppercase tracking-widest">{currentUser?.email}</p>
+                            <div className="pt-3 border-t-2 border-black/5 space-y-2 animate-in-fade">
+                                <div className="flex justify-between items-center text-[8px] font-black uppercase tracking-tighter">
+                                    <span>Neural Load</span>
+                                    <span className="text-accent animate-pulse">42%</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-black/5 border border-black/10 overflow-hidden">
+                                    <div className="h-full bg-black w-[42%]" />
+                                </div>
                             </div>
                         )}
                     </div>
@@ -229,61 +251,110 @@ export default function Dashboard() {
 
 function OverviewTab({ onCreate, setActiveTab, projects }) {
     const { currentUser } = useAuth();
+    const [prompt, setPrompt] = useState("");
+    const [views, setViews] = useState(1245890);
+
+    // Simulate real-time view growth
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setViews(prev => prev + Math.floor(Math.random() * 5));
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
-
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="col-span-12 md:col-span-8 p-6 sm:p-12 flex flex-col justify-between min-h-[350px] sm:min-h-[400px] relative overflow-hidden bg-black text-white border-8 border-black shadow-[8px_8px_0px_0px_rgba(112,0,223,1)] sm:shadow-[12px_12px_0px_0px_rgba(112,0,223,1)] rotate-1 group">
-
+            <div className="col-span-12 lg:col-span-8 p-6 sm:p-12 flex flex-col justify-between min-h-[450px] relative overflow-hidden bg-black text-white border-8 border-black shadow-[12px_12px_0px_0px_rgba(112,0,223,1)] rotate-1 group">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-accent opacity-20 blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                <div className="relative z-10">
-                    <div className="inline-block bg-white text-black font-black uppercase tracking-widest text-[9px] px-3 py-1.5 mb-6 border-2 border-white">
-                        Editor Status: Ready
+
+                <div className="relative z-10 space-y-8">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                        <div className="inline-block bg-white text-black font-black uppercase tracking-widest text-[9px] px-3 py-1.5 border-2 border-white">
+                            Neural Engine Active
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 leading-none mt-1">Real-time Syncing</span>
+                        </div>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl font-black uppercase italic tracking-tighter mb-3 leading-none">
+
+                    <h1 className="text-4xl sm:text-5xl font-black uppercase italic tracking-tighter mb-3 leading-[0.9]">
                         Welcome <br />
                         <span className="text-accent underline decoration-white decoration-4 underline-offset-4">{currentUser?.displayName?.split(' ')[0] || "Creator"}.</span>
                     </h1>
 
-                    <p className="text-white/60 text-base sm:text-lg font-bold max-w-md leading-relaxed uppercase tracking-tight">
-                        Your editor is ready. Start a new video sequence and make something amazing today.
-                    </p>
+                    {/* Neural Command Center */}
+                    <div className="max-w-xl space-y-4 pt-4">
+                        <p className="text-white/40 text-[9px] font-black uppercase tracking-[0.3em] ml-1">Neural Command Center</p>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="flex-1 relative">
+                                <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-accent" />
+                                <input
+                                    value={prompt}
+                                    onChange={(e) => setPrompt(e.target.value)}
+                                    placeholder="Prompt AI to create a sequence..."
+                                    className="w-full bg-white/5 border-2 border-white/10 h-14 pl-12 pr-4 text-xs font-bold focus:border-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20"
+                                />
+                            </div>
+                            <Button
+                                variant="brutal"
+                                className="h-14 px-8 italic whitespace-nowrap"
+                                onClick={() => {
+                                    if (!prompt) return onCreate();
+                                    onCreate(prompt);
+                                }}
+                            >
+                                <Zap className="h-4 w-4 mr-2 fill-black" />
+                                Gen Sequence
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-                <Button variant="brutal" className="w-fit mt-10 h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg italic" onClick={onCreate}>
-                    <Play className="h-4 w-4 sm:h-5 sm:w-5 fill-black text-black mr-3" /> Start Editing
-                </Button>
             </div>
 
-
-            <div className="col-span-12 md:col-span-4 flex flex-col gap-8">
-                <div className="brutal-card flex-1 flex flex-col justify-center items-center text-center p-6 sm:p-8 bg-white border-2 border-black">
-                    <TrendingUp className="h-10 w-10 text-accent mb-3" />
-                    <h3 className="text-3xl font-black italic">1.2M</h3>
-                    <span className="text-[9px] font-black uppercase tracking-widest text-black/40 mt-1">Views Total</span>
+            <div className="col-span-12 lg:col-span-4 flex flex-col gap-8">
+                <div className="brutal-card flex-1 flex flex-col justify-center items-center text-center p-8 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                    <TrendingUp className="h-10 w-10 text-accent mb-4" />
+                    <h3 className="text-4xl font-black italic">{(views / 1000000).toFixed(1)}M</h3>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-black/40 mt-1">Views Globally</span>
                 </div>
-                <div className="brutal-card flex-1 flex flex-col justify-center items-center text-center p-6 sm:p-8 bg-white border-2 border-black">
-                    <Zap className="h-8 w-8 text-accent mb-2" />
-                    <h3 className="text-3xl font-black italic">98%</h3>
-                    <span className="text-[9px] font-black uppercase tracking-widest text-black/40 mt-1">Engine Speed</span>
+                <div className="brutal-card flex-1 flex flex-col justify-center items-center text-center p-8 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                    <Zap className="h-10 w-10 text-accent mb-4" />
+                    <h3 className="text-4xl font-black italic">99.2%</h3>
+                    <span className="text-[9px] font-black uppercase tracking-widest text-black/40 mt-1">Neural Uptime</span>
                 </div>
             </div>
 
-
-            <div className="col-span-12 mt-12">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 border-b-8 border-black pb-6 space-y-4 sm:space-y-0">
-                    <h3 className="text-4xl sm:text-3xl font-black uppercase italic tracking-tighter">Recent Videos</h3>
-                    <Button variant="brutal-ghost" size="sm" onClick={() => setActiveTab('projects')} className="text-sm font-black italic">View Archive <ChevronRight className="ml-2 h-4 w-4" /></Button>
+            <div className="col-span-12 mt-16">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 border-b-8 border-black pb-8 space-y-4 sm:space-y-0">
+                    <div>
+                        <h3 className="text-4xl sm:text-5xl font-black uppercase italic tracking-tighter leading-none text-black">Workspace Feed</h3>
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-black/30 mt-4 leading-none ml-1 uppercase">Recent Neural Assets</p>
+                    </div>
+                    <Button variant="brutal-ghost" size="sm" onClick={() => setActiveTab('projects')} className="text-sm font-black italic h-12">View Library <ChevronRight className="ml-2 h-4 w-4" /></Button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     {projects.slice(0, 3).map(project => (
-                        <div key={project.id} className="group brutal-card aspect-video border-4 border-black overflow-hidden relative cursor-pointer">
+                        <div
+                            key={project.id}
+                            onClick={() => navigate(`/editor/${project.id}`)}
+                            className="group brutal-card aspect-video border-4 border-black overflow-hidden relative cursor-pointer shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none translate-x-[-4px] translate-y-[-4px] hover:translate-x-0 hover:translate-y-0 transition-all"
+                        >
                             <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                                <FileVideo className="h-20 w-20 text-black/5" />
+                                <FileVideo className="h-24 w-24 text-black/5" />
+                                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity flex items-center justify-center">
+                                    <div className="w-16 h-16 bg-white border-4 border-black rounded-none flex items-center justify-center rotate-3">
+                                        <Play className="h-6 w-6 text-black fill-black" />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 flex flex-col justify-end p-6 sm:p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-                                <h4 className="font-black uppercase italic text-white text-lg sm:text-xl truncate">{project.title}</h4>
-
-                                <p className="text-[10px] text-white/60 font-black uppercase tracking-widest mt-2">{new Date(project.createdAt?.seconds * 1000).toLocaleDateString()}</p>
+                            <div className="absolute inset-x-0 bottom-0 bg-white border-t-4 border-black p-6">
+                                <h4 className="font-black uppercase italic text-black text-xl truncate">{project.title}</h4>
+                                <div className="flex items-center justify-between mt-2">
+                                    <p className="text-[9px] text-black/40 font-black uppercase tracking-widest">{new Date(project.createdAt?.seconds * 1000).toLocaleDateString()}</p>
+                                    <span className="text-[9px] font-black uppercase tracking-widest text-accent">Neural Sequence</span>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -347,14 +418,17 @@ function ProjectsTab({ onCreate, projects }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
                 {filteredProjects.map((project) => (
-                    <div key={project.id} className="brutal-card p-4 sm:p-6 bg-white border-4 border-black hover:bg-gray-50 transition-all cursor-pointer group">
-
+                    <div
+                        key={project.id}
+                        onClick={() => navigate(`/editor/${project.id}`)}
+                        className="brutal-card p-4 sm:p-6 bg-white border-4 border-black hover:bg-gray-50 transition-all cursor-pointer group shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none translate-x-[-2px] translate-y-[-2px] hover:translate-x-0 hover:translate-y-0"
+                    >
                         <div className="aspect-video bg-gray-100 border-2 border-black mb-6 flex items-center justify-center text-black/5 group-hover:text-accent group-hover:bg-accent/5 transition-all relative">
                             <FileVideo className="h-16 w-16" />
                             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
                                     onClick={(e) => handleDelete(e, project.id)}
-                                    className="p-2 bg-white border-2 border-black hover:bg-error hover:text-white transition-colors"
+                                    className="p-2 bg-white border-2 border-black hover:bg-red-500 hover:text-white transition-colors"
                                 >
                                     <Trash2 className="h-4 w-4" />
                                 </button>
@@ -417,21 +491,41 @@ function StrategyTab() {
                 <BrainCircuit className="absolute -bottom-20 -right-20 w-80 h-80 text-white/5 rotate-12" />
             </div>
 
-            <div className="col-span-12 md:col-span-12 lg:col-span-4 brutal-card p-10 bg-white border-4 border-black">
-                <h3 className="text-3xl font-black uppercase italic mb-8 border-b-4 border-black inline-block pb-2 leading-none">Trending</h3>
-                <ul className="space-y-6">
-                    {[
-                        { label: "#SimpleVideo", val: "+12%", color: "text-success" },
-                        { label: "#NeoBrutalism", val: "+34%", color: "text-accent" },
-                        { label: "#AIVideo", val: "+8%", color: "text-warning" },
-                        { label: "#NeuralEdit", val: "+21%", color: "text-accent" }
-                    ].map((tag, i) => (
-                        <li key={i} className="flex justify-between items-center text-xl font-black uppercase border-b-2 border-black/5 pb-4">
-                            <span className="text-black/40 text-sm tracking-widest">{tag.label}</span>
-                            <span className={cn("italic", tag.color)}>{tag.val}</span>
-                        </li>
-                    ))}
-                </ul>
+            <div className="col-span-12 md:col-span-12 lg:col-span-4 space-y-8">
+                <div className="brutal-card p-10 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                    <h3 className="text-3xl font-black uppercase italic mb-8 border-b-4 border-black inline-block pb-2 leading-none">Trending</h3>
+                    <ul className="space-y-6">
+                        {[
+                            { label: "#SimpleVideo", val: "+12%", color: "text-green-600" },
+                            { label: "#NeoBrutalism", val: "+34%", color: "text-accent" },
+                            { label: "#AIVideo", val: "+8%", color: "text-amber-500" },
+                            { label: "#NeuralEdit", val: "+21%", color: "text-accent" }
+                        ].map((tag, i) => (
+                            <li key={i} className="flex justify-between items-center text-xl font-black uppercase border-b-2 border-black/5 pb-4">
+                                <span className="text-black/40 text-[10px] tracking-widest leading-none mt-1">{tag.label}</span>
+                                <span className={cn("italic", tag.color)}>{tag.val}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="brutal-card p-10 bg-black text-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(112,0,223,1)]">
+                    <h3 className="text-2xl font-black uppercase italic mb-6 text-accent">Neural Logs</h3>
+                    <div className="space-y-4 font-mono text-[9px] uppercase tracking-wider text-white/40">
+                        <div className="flex gap-4 border-b border-white/5 pb-2">
+                            <span className="text-white/60">01:24:02</span>
+                            <span>Core Synced</span>
+                        </div>
+                        <div className="flex gap-4 border-b border-white/5 pb-2">
+                            <span className="text-white/60">01:25:44</span>
+                            <span>Buffer Optimized</span>
+                        </div>
+                        <div className="flex gap-4">
+                            <span className="text-white/60">01:26:10</span>
+                            <span className="text-accent">DASH_v2_ONLINE</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

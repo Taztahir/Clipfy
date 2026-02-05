@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import { Button } from "../components/ui/Core";
 import { Check } from "lucide-react";
 
@@ -31,9 +30,8 @@ export default function Pricing() {
 
     return (
         <div className="min-h-screen bg-white text-black selection:bg-accent/10 relative overflow-x-hidden">
-            <Navbar />
-
             <main className="pt-48 pb-32 px-6 max-w-7xl mx-auto">
+
                 <div className="text-center mb-24 space-y-6">
                     <h1 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter leading-none">
                         Simple <br />

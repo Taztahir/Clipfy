@@ -1,6 +1,5 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import { BrainCircuit, Zap, Layers, Share2, Wand2, Cpu, ArrowRight } from "lucide-react";
+import { BrainCircuit, Zap, Layers, Share2, Wand2, Cpu } from "lucide-react";
+
 
 export default function Features() {
     const features = [
@@ -14,9 +13,8 @@ export default function Features() {
 
     return (
         <div className="min-h-screen bg-white text-black selection:bg-accent/10 relative overflow-x-hidden">
-            <Navbar />
-
             <main className="pt-48 pb-32 px-6 max-w-7xl mx-auto">
+
                 <header className="mb-32 space-y-8 animate-in-fade">
                     <div className="inline-block bg-black text-white font-black uppercase tracking-widest text-[10px] px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(112,0,223,1)]">
                         New Features

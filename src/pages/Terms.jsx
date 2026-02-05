@@ -1,23 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Hexagon, ArrowLeft } from "lucide-react";
-import { Button } from "../components/ui/Core";
+
 
 export default function Terms() {
     return (
-        <div className="min-h-screen bg-white text-black p-8 md:p-24 selection:bg-accent/10">
+        <div className="min-h-screen bg-white text-black p-8 md:p-24 selection:bg-accent/10 pt-48 pb-32">
             <div className="max-w-4xl mx-auto space-y-16">
-                <div className="flex items-center justify-between border-b-8 border-black pb-8">
-                    <div className="flex items-center gap-4">
-                        <Link to="/" className="w-12 h-12 bg-black flex items-center justify-center border-4 border-black shadow-[6px_6px_0px_0px_rgba(112,0,223,1)] rotate-6">
-                            <Hexagon className="h-6 w-6 text-white fill-white" />
-                        </Link>
-                        <h1 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">Terms</h1>
-                    </div>
-                    <Link to="/signup">
-                        <Button variant="brutal-ghost" className="italic"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Signup</Button>
-                    </Link>
+                <div className="border-b-8 border-black pb-8">
+                    <h1 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">Terms of Service</h1>
                 </div>
+
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
                     <div className="md:col-span-4 space-y-8">
@@ -58,10 +49,8 @@ export default function Terms() {
                     </div>
                 </div>
 
-                <div className="border-t-8 border-black pt-8 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-black/20">© 2026 Clipfy Neural Systems Inc. All Rights Reserved.</p>
-                </div>
             </div>
         </div>
     );
 }
+

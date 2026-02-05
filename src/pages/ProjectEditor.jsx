@@ -92,29 +92,125 @@ export default function ProjectEditor() {
         return () => clearTimeout(timeoutId);
     }, [tracks, duration, id]);
 
-    const handleGenerate = async () => {
-        addToast({ title: "Connecting to Neural Core...", type: "default" });
-        try {
-            const result = await API.generateExecutionPlan("Cyberpunk intro");
-            addToast({ title: "Plan Generated", description: "Injecting tracks...", type: "success" });
+    // AI State
+    const [isScanning, setIsScanning] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
+    const [activeEffect, setActiveEffect] = useState(null);
 
-            // Actually adding content to the store
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsScanning(true);
+        const file = e.dataTransfer.files[0];
+
+        addToast({ title: "Neural Link Established", description: `Analyzing ${file?.name || "Asset"}...`, type: "default" });
+
+        setTimeout(() => {
+            setIsScanning(false);
             addClip('track-1', {
-                name: 'Neon_Pulse.mp4',
+                name: file?.name || 'Uploaded_Asset.mp4',
                 start: currentTime,
                 duration: 5,
                 type: 'video'
             });
+            addToast({ title: "Asset Integrated", type: "success" });
+        }, 2000);
+    };
+
+    const handleGenerate = async () => {
+        setIsScanning(true);
+        addToast({ title: "Connecting to Neural Core...", type: "default" });
+        try {
+            await new Promise(r => setTimeout(r, 1000));
+            addToast({ title: "Sequencing Tracks...", type: "default" });
+            await new Promise(r => setTimeout(r, 1000));
+
+            setProject({
+                tracks: [
+                    {
+                        id: 'track-1', label: 'Neural Alpha', clips: [
+                            { id: 'c1', name: 'City_Flyover.mp4', start: 0, duration: 8, type: 'video' },
+                            { id: 'c2', name: 'Data_Stream.mp4', start: 8, duration: 12, type: 'video' }
+                        ]
+                    },
+                    {
+                        id: 'track-2', label: 'Audio Engine', clips: [
+                            { id: 'c3', name: 'Cyber_Pulse.wav', start: 0, duration: 20, type: 'audio' }
+                        ]
+                    }
+                ],
+                duration: 20,
+                title: "AI Synthesis: Cyberpunk"
+            });
+
+            addToast({ title: "Neural Sequence Complete", type: "success" });
         } catch (error) {
             addToast({ title: "Generation Failed", description: "AI Busy", type: "error" });
+        } finally {
+            setIsScanning(false);
         }
     };
 
+    const handleExport = () => {
+        setIsExporting(true);
+    };
+
     return (
-        <div className="h-screen w-screen bg-[#030014] text-white overflow-hidden flex flex-col font-sans selection:bg-accent/30">
+        <div
+            className="h-screen w-screen bg-[#030014] text-white overflow-hidden flex flex-col font-sans selection:bg-accent/30 relative"
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={handleDrop}
+        >
             <CommandPalette isOpen={isCmdKOpen} onClose={setIsCmdKOpen} />
 
-            {/* Top Bar - 8px Grid (h-14 = 56px) */}
+            {/* AI Asset Scanner Overlay */}
+            {isScanning && (
+                <div className="absolute inset-0 z-[200] bg-black/60 backdrop-blur-sm flex items-center justify-center pointer-events-none">
+                    <div className="w-96 space-y-8 text-center animate-in-zoom">
+                        <div className="relative group">
+                            <div className="absolute inset-x-0 h-1 bg-accent/50 blur-xl animate-[scan_2s_ease-in-out_infinite]" />
+                            <div className="h-48 w-full border-4 border-accent bg-accent/10 relative overflow-hidden flex items-center justify-center">
+                                <div className="absolute inset-0 bg-[linear-gradient(rgba(112,0,223,0.2)_1px,transparent_1px)] bg-[size:100%_4px] animate-[roll_10s_linear_infinite]" />
+                                <Sparkles className="h-20 w-20 text-accent animate-pulse" />
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <h2 className="text-2xl font-black uppercase italic tracking-tighter text-accent">Neural Analysis...</h2>
+                            <p className="text-[10px] uppercase font-bold tracking-[0.4em] text-white/40">Syncing with Creative Core</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Export Progress Modal */}
+            {isExporting && (
+                <div className="absolute inset-0 z-[300] bg-black/80 backdrop-blur-md flex items-center justify-center">
+                    <div className="w-[500px] brutal-card bg-black border-4 border-white/10 p-12 space-y-12 animate-in-fade">
+                        <div className="flex justify-between items-end">
+                            <div className="space-y-2">
+                                <h3 className="text-3xl font-black uppercase italic tracking-tighter">Rendering...</h3>
+                                <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/40">Finalizing Neural Asset</p>
+                            </div>
+                            <span className="font-mono text-accent text-3xl font-black italic">84%</span>
+                        </div>
+
+                        <div className="h-4 w-full bg-white/5 border border-white/10 relative overflow-hidden">
+                            <div className="absolute inset-y-0 left-0 bg-accent w-[84%] shadow-[0_0_20px_rgba(112,0,223,0.5)] transition-all duration-1000" />
+                        </div>
+
+                        <div className="flex gap-4">
+                            <Button variant="ghost" disabled className="flex-1 text-[10px] opacity-20 italic">Cancelling...</Button>
+                            <Button variant="primary" onClick={() => {
+                                setIsExporting(false);
+                                addToast({ title: "Neural File Exported", description: "Saved to your local drives.", type: "success" });
+                            }} className="flex-1 h-14 italic uppercase font-black tracking-widest text-[11px]">
+                                Finalize Now
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Top Bar */}
             <header className="h-14 border-b border-white/5 bg-black/40 backdrop-blur-2xl flex items-center justify-between px-6 z-50">
                 <div className="flex items-center gap-6">
                     <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="hover:bg-white/5">
@@ -134,7 +230,7 @@ export default function ProjectEditor() {
                         <Sparkles className="h-3 w-3 text-accent" />
                         <span>Neural Generate</span>
                     </Button>
-                    <Button variant="primary" size="sm" className="gap-2 h-9 text-[10px]">
+                    <Button variant="primary" size="sm" onClick={handleExport} className="gap-2 h-9 text-[10px]">
                         <Download className="h-3 w-3" />
                         <span>Export</span>
                     </Button>
@@ -142,19 +238,25 @@ export default function ProjectEditor() {
             </header>
 
             <div className="flex-1 flex overflow-hidden">
-                {/* Left Sidebar - 8px Grid (w-16 = 64px) */}
+                {/* Left Sidebar */}
                 <div className="w-16 border-r border-white/5 bg-black/40 backdrop-blur-xl flex flex-col items-center py-6 gap-6 z-40">
                     <SidebarItem icon={Layers} active />
-                    <SidebarItem icon={Wand2} />
+                    <SidebarItem icon={Wand2} onClick={() => {
+                        setActiveEffect(prev => prev ? null : 'cyberpunk');
+                        addToast({ title: activeEffect ? "Neural Grade Removed" : "Cyberpunk Grade Applied", type: "default" });
+                    }} />
                     <SidebarItem icon={Music} />
                     <SidebarItem icon={ImageIcon} />
                     <div className="flex-1" />
                     <SidebarItem icon={Settings} />
                 </div>
 
-                {/* Center: Canvas - Fluid Spacing */}
+                {/* Center: Canvas */}
                 <div className="flex-1 bg-[#050505] relative flex items-center justify-center p-8">
-                    <div className="aspect-video h-full max-h-[70vh] bg-black shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-lg border border-white/5 relative overflow-hidden group">
+                    <div className={cn(
+                        "aspect-video h-full max-h-[70vh] bg-black shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-lg border border-white/5 relative overflow-hidden group transition-all duration-700",
+                        activeEffect === 'cyberpunk' && "hue-rotate-90 saturate-200 contrast-125 shadow-[0_0_100px_rgba(112,0,223,0.3)]"
+                    )}>
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <Video className="w-20 h-20 text-white/5" />
                         </div>
@@ -166,7 +268,7 @@ export default function ProjectEditor() {
                     </div>
                 </div>
 
-                {/* Right Sidebar: Inspector - 8px Grid (w-72 = 288px) */}
+                {/* Right Sidebar: Inspector */}
                 <div className="w-72 border-l border-white/5 bg-black/40 backdrop-blur-xl p-6 flex flex-col gap-6">
                     <div className="flex items-center justify-between">
                         <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">Inspector</h3>
@@ -207,9 +309,8 @@ export default function ProjectEditor() {
                 </div>
             </div>
 
-            {/* Bottom: Timeline - 8px Grid (h-72 = 288px) */}
+            {/* Bottom: Timeline */}
             <div className="h-72 border-t border-white/5 bg-[#030014] flex flex-col relative z-50">
-                {/* Timeline Toolbar - h-10 (40px) */}
                 <div className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-black/40">
                     <div className="flex items-center gap-1">
                         <Button variant="ghost" size="sm" onClick={() => seekTo(0)} className="h-8 w-8 p-0"><SkipBack className="h-3.5 w-3.5" /></Button>
@@ -234,20 +335,16 @@ export default function ProjectEditor() {
                     </div>
                 </div>
 
-                {/* Ruler & Tracks Container */}
                 <div className="flex-1 overflow-auto relative custom-scrollbar select-none" onClick={handleScrub}>
-                    {/* Ruler */}
                     <div className="h-8 border-b border-white/5 bg-white/[0.01] flex relative min-w-full">
                         {Array.from({ length: Math.ceil(duration / 5) }).map((_, i) => (
-                            <div key={i} className="flex-1 border-l border-white/5 text-[9px] font-mono text-white/20 pl-2 pt-2 select-none pointer-events-none" style={{ minWidth: '120px' }}>
+                            <div key={i} className="flex-1 border-l border-white/5 text-[9px] font-mono text-white/20 pl-2 pt-2" style={{ minWidth: '120px' }}>
                                 {formatTime(i * 5)}
                             </div>
                         ))}
                     </div>
 
-                    {/* Tracks Area */}
                     <div className="p-6 space-y-3 relative min-w-full pb-12">
-                        {/* Playhead */}
                         <div
                             className="absolute top-0 bottom-0 w-px bg-red-500 z-50 pointer-events-none transition-all duration-75"
                             style={{ left: `${(currentTime / duration) * 100}%` }}
@@ -299,3 +396,4 @@ function formatTime(seconds) {
     const ms = Math.floor((seconds % 1) * 100);
     return `${min}:${sec.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
 }
+

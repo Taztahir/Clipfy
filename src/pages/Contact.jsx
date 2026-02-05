@@ -1,14 +1,13 @@
 import React from "react";
 import { Button, Input } from "../components/ui/Core";
-import Navbar from "../components/Navbar";
 import { Mail, MessageSquare, MapPin, Send } from "lucide-react";
 
 export default function Contact() {
     return (
         <div className="min-h-screen bg-white text-black selection:bg-accent/10 relative overflow-x-hidden flex flex-col">
-            <Navbar />
-
             <main className="flex-1 flex items-center justify-center p-6 pt-48 pb-32">
+
+
                 <div className="grid lg:grid-cols-2 gap-16 max-w-7xl w-full mx-auto">
 
                     <div className="space-y-16 animate-in-fade self-center">

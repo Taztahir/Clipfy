@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import { ArrowUpRight, Calendar, User, Sparkles } from "lucide-react";
 
 export default function Blog() {
@@ -36,9 +35,8 @@ export default function Blog() {
 
     return (
         <div className="min-h-screen bg-white text-black selection:bg-accent/10 relative overflow-x-hidden">
-            <Navbar />
-
             <main className="pt-48 pb-32 px-6 max-w-7xl mx-auto">
+
                 <header className="mb-32 space-y-8 text-center">
                     <div className="inline-flex items-center gap-3 px-4 py-2 bg-black text-white font-black uppercase tracking-widest text-[10px] border-2 border-black shadow-[4px_4px_0px_0px_rgba(112,0,223,1)]">
                         <Sparkles className="h-4 w-4" /> The Blog
